@@ -1,0 +1,22 @@
+version: "3"
+services:
+  mock-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: mock-server
+    restart: unless-stopped
+    ports: 
+     - "8080:${HTTP_PORT}"
+    env_file: .env
+  proxy:
+    container_name: proxy
+    build:
+      context: .
+      dockerfile: nginx_proxy/Dockerfile
+    restart: unless-stopped
+    ports: 
+     - "80:80"
+    depends_on:
+      - mock-server
+      

@@ -22,8 +22,8 @@ export default async (fastify: FastifyInstance, options: { createRequestContext:
     })
 
     fastify.get<{ Headers: TIdHeaders }>('/ping', { schema: ping }, async (req, res) => {
-        const actor = auth(req.headers)
-        assert(actor.type === 'admin', new Forbidden())
+        // const actor = auth(req.headers)
+        // assert(actor.type === 'admin', new Forbidden())
 
         res.code(200).send({ msg: 'ok' })
     })
